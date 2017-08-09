@@ -1,7 +1,7 @@
 #include <bcm2835.h>
 #include <time.h>
 #include <stdio.h>
-#define PIN RPI_GPIO_P1_07 
+#define PIN_OUT RPI_GPIO_P1_07 
 
 int main(int argc, char *argv[]) {
 	
@@ -13,15 +13,15 @@ int main(int argc, char *argv[]) {
 	float total = 0;
 	int cont = 0;
     //INICIALIZAR A CONFIGURAÇÃO DO PINO COMO SAÍDA
-    bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_OUTP);
+    bcm2835_gpio_fsel(PIN_OUT, BCM2835_GPIO_FSEL_OUTP);
 
     while(cont != 10) { 
 		
         t1 = clock();
         //INICIALIZAR O PINO ALTA (5V)
-        bcm2835_gpio_write(PIN, HIGH);
+        bcm2835_gpio_write(PIN_OUT, HIGH);
         //INICIALIZAR O PINO BAIXA (0V)
-        bcm2835_gpio_write(PIN, LOW);
+        bcm2835_gpio_write(PIN_OUT, LOW);
         t2 = clock();
         
         // REALIZAR A SOMA DO TEMPO DE CADA CICLO EM SEGUNDOS
@@ -30,8 +30,8 @@ int main(int argc, char *argv[]) {
     }
 	
 	//EXIBIR A MÉDIA DE TEMPO EM SEGUNDOS DE UM CICLO
-	//printf("valor em segundos: %.10f\n", (total/cont));
 	printf("valor em segundos: %.10f\n", (total/cont));
+	
 	
     return 0;
 }
